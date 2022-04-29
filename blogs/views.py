@@ -27,6 +27,7 @@ def blog_detail(request, blog_id):
     return render(request, 'blogs/blog_details.html', context)
 
 def add_comment(request, blog_id):
+
     blog_obj = get_object_or_404(Blogs, pk=blog_id)
     try:
         if request.method == 'POST':
@@ -35,7 +36,7 @@ def add_comment(request, blog_id):
             commented_at = timezone.now()
             commented_by = "prakash" # for now
         else:
-            context = {"error_message" : ""}
+            context = {"error_message": ""}
             return render(request, 'blogs/home.html', context)
     except:
         context = {"error_message": sys.exc_info()[1].__str__()}
@@ -43,5 +44,10 @@ def add_comment(request, blog_id):
     else:
         return HttpResponseRedirect(reverse('home'))
 
-def update_blog(request):
+def update_blog(request, blog_id):
+    # open a selected blog
+    # allow someone to write
+    # if he confirm then save the new content but donot allow him to save in database
+    # Then return to the home page
+    blog_obj = get_object_or_404(Blogs, pk=blog_id)
     pass
