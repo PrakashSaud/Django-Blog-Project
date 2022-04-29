@@ -1,0 +1,44 @@
+{% extends "blogs/base.html" %}
+
+{% block head %}
+<title>{{ blog_instance.id }} | {{ blog_instance.title}}</title>
+{% endblock %}
+
+
+
+{% block content %}
+<h2>{{ blog_instance.title}}</h2>
+
+{% if error_message %}
+<p><strong>{{ error_message }}</strong></p>
+{% endif %}
+
+<h5>- created by {{ blog_instance.author }}  | at  {{blog_instance.date_created}}</h5>
+<h5>- last updated {{blog_instance.date_updated}}</h5>
+
+<p>{{ blog_instance.content }}</p>
+
+<hr>
+<h4>Comments:</h4>
+{% if blog_comments %}
+{% for each_comment in blog_comments %}
+<div>
+    <p>each_comment.comment_desc</p>
+    <h5>- {{each_comment.commented_by}} | {{each_comment.commented_at}}</h5>
+</div>
+{% endfor %}
+{% else %}
+<p>No comments yet</p>
+{% endif %}
+<form action="{% url 'blogs/blog_details' " class="form" method="POST">
+    {% csrf_token %}
+    <fieldset>
+    {% if error_message %}
+        <p><strong>{{ error_message }}</strong></p>
+    {% endif %}
+    <textarea name="comment" id="comment" placeholder="Your comment here"></textarea>
+    </fieldset>
+<button type="submit">Submit</button>
+</form>
+
+{% endblock %}

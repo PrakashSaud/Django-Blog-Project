@@ -1,0 +1,43 @@
+{% extends "blogs/base.html" %}
+
+
+{% block head %}
+<title>Home</title>
+{% endblock %}
+
+
+{% block content %}
+<hr>
+<div>
+    <h1>Welcome to my Blogs</h1>
+    <p>This is top blogspot most of the blogs are related to django.
+        Here you can read blogs, comments on them, edit our blogs and update them.
+        We can have conversation and give latest updates on django a popular web framework in python</p>
+</div>
+<hr>
+
+<!-- LISTING BLOGS IN HOMEPAGE -->
+<h2>Trending Blogs</h2>
+<div class="home-article">
+    {% if blogs_list %}
+    {% for each_blog in blogs_list %}
+<!--        <div class="blog-img">-->
+<!--            <img src="img/article1.jpg" alt="Article">-->
+<!--        </div>-->
+        <div class="blog-content">
+            <h3>{{each_blog.title}}</h3>
+            <div>written by {{each_blog.author}}</div>
+            <span>{{each_blog.date_created}} | {{each_blog.date_updated}}</span>
+            <a href="{% url 'blog_detail' each_blog.id %}"><h3>Read Now</h3></a>
+        </div>
+    {% endfor %}
+    {% else %}
+    <div class="blog-content">
+        <h3>No blogs are available</h3>
+    </div>
+    {% endif %}
+</div>
+
+
+
+{% endblock %}
