@@ -1,10 +1,12 @@
 {% extends "blogs/base.html" %}
 
-{% block head %}
-<title>{{ blog_instance.id }} | {{ blog_instance.title}}</title>
+<title>{% block title %}
+{{ blog_instance.id }} | {{ blog_instance.title}}
 {% endblock %}
+</title>
 
-
+<!--blog_instance-->
+<!--blog_comments-->
 
 {% block content %}
 <h2>{{ blog_instance.title}}</h2>
@@ -23,14 +25,14 @@
 {% if blog_comments %}
 {% for each_comment in blog_comments %}
 <div>
-    <p>each_comment.comment_desc</p>
+    <p>{{ each_comment.comment_desc }}</p>
     <h5>- {{each_comment.commented_by}} | {{each_comment.commented_at}}</h5>
 </div>
 {% endfor %}
 {% else %}
 <p>No comments yet</p>
 {% endif %}
-<form action="{% url 'blogs/blog_details' " class="form" method="POST">
+<form action="{% url 'blog_detail' %}" class="form" method="POST">
     {% csrf_token %}
     <fieldset>
     {% if error_message %}
@@ -40,5 +42,5 @@
     </fieldset>
 <button type="submit">Submit</button>
 </form>
-
+{{ selected_blog }}
 {% endblock %}

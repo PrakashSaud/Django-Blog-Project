@@ -3,9 +3,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    {% block head %}
-    <title>Base</title>
-    {% endblock %}
+
+    <title>{% block title %} {% endblock %}</title>
 </head>
 <body>
 <nav class="navigation">
@@ -14,7 +13,7 @@
         <ul>
             <li><a href="#">Home</a></li>
             <li><a href="#">About</a></li>
-            <li><a href="#">Contact</a></li>
+            <li><a href="{% url 'contact' %}">Contact</a></li>
         </ul>
     </div>
     <div class="nav-right">
@@ -25,6 +24,7 @@
     </div>
 </nav>
 {% block content %}
+
 {% endblock %}
 </body>
 </html>

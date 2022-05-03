@@ -7,7 +7,7 @@ class Blogs(models.Model):
     content = models.TextField()
     author = models.CharField(max_length=200)
     date_created = models.DateTimeField('date_created')
-    date_updated = models.DateTimeField('date_updated', blank=True)
+    date_updated = models.DateTimeField('date_updated', blank=True, null=True)
 
     def __str__(self):
         return self.title + " -- by " + self.author
@@ -28,3 +28,8 @@ class Comments(models.Model):
 
     class Meta:
         verbose_name = "Comment"
+
+
+
+class Users(models.Model):
+    pass

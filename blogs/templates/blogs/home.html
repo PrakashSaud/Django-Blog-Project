@@ -1,9 +1,9 @@
 {% extends "blogs/base.html" %}
 
-
-{% block head %}
-<title>Home</title>
-{% endblock %}
+<!--{% load static %}-->
+<title>{% block title %}
+Home
+    {% endblock %}</title>
 
 
 {% block content %}
@@ -19,8 +19,8 @@
 <!-- LISTING BLOGS IN HOMEPAGE -->
 <h2>Trending Blogs</h2>
 <div class="home-article">
-    {% if blogs_list %}
-    {% for each_blog in blogs_list %}
+    {% if all_blogs %}
+    {% for each_blog in all_blogs %}
 <!--        <div class="blog-img">-->
 <!--            <img src="img/article1.jpg" alt="Article">-->
 <!--        </div>-->
