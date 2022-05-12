@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Article List</title>
+</head>
+<body>
+<h2>
+    Here is the top rated articles sorted by published date
+</h2>
+<ul>
+{% for artile in object_list %}
+    <li>{{ article.pub_date|date }} - {{ article.headline }}</li>
+{% empty %}
+    <li>No artiles published yet.</li>
+{% endfor %}
+
+</ul>
+</body>
+</html>

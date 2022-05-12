@@ -9,16 +9,16 @@
 <!--blog_comments-->
 
 {% block content %}
-<h2>{{ blog_instance.title}}</h2>
+<h2>{{ object.title}}</h2>
 
 {% if error_message %}
 <p><strong>{{ error_message }}</strong></p>
 {% endif %}
 
-<h5>- created by {{ blog_instance.author }}  | at  {{blog_instance.date_created}}</h5>
-<h5>- last updated {{blog_instance.date_updated}}</h5>
+<h5>- created by {{ object.author }}  | at  {{object.date_created}}</h5>
+<h5>- last updated {{object.date_updated}}</h5>
 
-<p>{{ blog_instance.content }}</p>
+<p>{{ object.content }}</p>
 
 <hr>
 <h4>Comments:</h4>

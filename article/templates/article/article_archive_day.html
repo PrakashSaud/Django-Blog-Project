@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Day Archive</title>
+</head>
+<body>
+<h1>{{ day }}</h1>
+<ul>
+    {% for article in object_list %}
+    <li>{{ article.pub_date|date:"F j, Y" }}: {{ article.title }}</li>
+    {% endfor %}
+</ul>
+<p>
+    {% if previous_day %}
+    Previous Day: {{ previous_day }}
+    {% endif %}
+    {% if previous_day and next_day %} -- {% endif %}
+    {% if next_day %}
+    Next Day: {{ next_day }}
+    {% endif %}
+</p>
+</body>
+</html>

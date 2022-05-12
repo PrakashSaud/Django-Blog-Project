@@ -9,12 +9,25 @@ from django.core.mail import send_mail, BadHeaderError
 
 from .forms import ContactForm
 
+# import TemplateView, DetailView
+from django.views.generic.base import TemplateView
+from django.views.generic.detail import DetailView
 
 # Create your views here.
-def home(request):
-    blogs_list = Blogs.objects.all()
-    context = {"all_blogs": blogs_list}
-    return render(request, 'blogs/home.html', context)
+# def home(request):
+#     blogs_list = Blogs.objects.all()
+#     context = {"all_blogs": blogs_list}
+#     return render(request, 'blogs/home.html', context)
+
+
+class HomeView(TemplateView):
+    template_name = "blogs/home.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['blogs_list'] = Blogs.objects.all()
+        return context
+
 
 def blog_detail(request, blog_id):
     blog_instance = get_object_or_404(Blogs, pk=blog_id)
@@ -29,6 +42,15 @@ def blog_detail(request, blog_id):
         'blog_comments': blog_comments
     }
     return render(request, 'blogs/blog_details.html', context)
+
+# class BlogDetailView(DetailView):
+#     model = Blogs
+#     template_name = 'blogs/blog_details.html'
+#
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         return context
+
 
 def add_comment(request, blog_id):
 
@@ -75,7 +97,7 @@ def contactView(request):
             subject = form.cleaned_data['subject']
             message = form.cleaned_data['message']
             sender = form.cleaned_data['sender']
-            cc_myself = form.cleaned_data['cc_myself']
+            # cc_myself = form.cleaned_data['cc_myself']
 
             try:
                 send_mail(subject, message, sender, ['admin@example.com'])
@@ -83,6 +105,7 @@ def contactView(request):
                 return HttpResponse('Invalid header found.')
             return redirect('success')
     return render(request, 'contact.html', {'form': form})
+
 
 def successView(request):
     return HttpResponse('Success! Thank you for your message.')
