@@ -14,22 +14,26 @@ Home
         Here you can read blogs, comments on them, edit our blogs and update them.
         We can have conversation and give latest updates on django a popular web framework in python</p>
 </div>
+<a href="{% url 'blog_create' %}">Create Blog</a>
 <hr>
 
 <!-- LISTING BLOGS IN HOMEPAGE -->
-<h2>Trending Blogs</h2>
+<h1>Trending Blogs</h1>
+
 <div class="home-article">
     {% if blogs_list %}
-    {% for each_blog in blogs_list %}
+    {% for blog in blogs_list %}
 <!--        <div class="blog-img">-->
 <!--            <img src="img/article1.jpg" alt="Article">-->
 <!--        </div>-->
         <div class="blog-content">
-            <h3>{{each_blog.title}}</h3>
-            <div>written by {{each_blog.author}}</div>
-            <span>{{each_blog.date_created}} | {{each_blog.date_updated}}</span>
-            <a href="{% url 'blog_detail' each_blog.id %}"><h3>Read Now</h3></a>
+            <h3>{{ blog.title }}</h3>
+            <div>written by {{ blog.author }}</div>
+            <span>{{ blog.date_created }} | {{ each_blog.date_updated }}</span>
+            <a href="{% url 'blog_detail' pk=blog.pk %}"><h3>Read Now</h3></a>
+            <a href="{% url 'blog_detail' pk=blog.pk %}">Comments:</a>
         </div>
+    <hr>
     {% endfor %}
     {% else %}
     <div class="blog-content">

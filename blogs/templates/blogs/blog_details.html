@@ -1,7 +1,7 @@
 {% extends "blogs/base.html" %}
 
 <title>{% block title %}
-{{ blog_instance.id }} | {{ blog_instance.title}}
+{{ blog.id }} | {{ blog.title}}
 {% endblock %}
 </title>
 
@@ -9,21 +9,26 @@
 <!--blog_comments-->
 
 {% block content %}
-<h2>{{ object.title}}</h2>
 
-{% if error_message %}
-<p><strong>{{ error_message }}</strong></p>
+<h2>{{ blog.title }}</h2>
+
+{% if blog.date_published %}
+<p><strong>{{ blog.date_published }}</strong></p>
+
+{% else %}
+<a href="{% url 'blog_publish' pk=blog.pk %}">Publish</a>
 {% endif %}
 
-<h5>- created by {{ object.author }}  | at  {{object.date_created}}</h5>
-<h5>- last updated {{object.date_updated}}</h5>
+<h5>- created by {{ blog.author }}  | at  {{blog.date_created}}</h5>
+<h5>- last updated {{blog.date_updated}}</h5>
 
-<p>{{ object.content }}</p>
+<p>{{ blog.content|safe|linebreaksbr }}</p>
+
 
 <hr>
 <h4>Comments:</h4>
-{% if blog_comments %}
-{% for each_comment in blog_comments %}
+{% if blog.comments.all %}
+{% for each_comment in blog.comments.all %}
 <div>
     <p>{{ each_comment.comment_desc }}</p>
     <h5>- {{each_comment.commented_by}} | {{each_comment.commented_at}}</h5>
@@ -32,7 +37,7 @@
 {% else %}
 <p>No comments yet</p>
 {% endif %}
-<form action="{% url 'blog_detail' %}" class="form" method="POST">
+<form action="{% url 'blog_detail' pk=blog.pk%}" class="form" method="POST">
     {% csrf_token %}
     <fieldset>
     {% if error_message %}
@@ -42,5 +47,5 @@
     </fieldset>
 <button type="submit">Submit</button>
 </form>
-{{ selected_blog }}
+{{ blog.comments }}
 {% endblock %}

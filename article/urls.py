@@ -5,10 +5,10 @@ from . import views
 from .models import Article
 
 urlpatterns = [
-    path('', views.HomePageView.as_view(), name="home"),
-    path('counter/<int:pk>/', views.ArticleCounterRedirectView.as_view(), name='article-counter'),
+    path('', views.HomePageView.as_view(), name="article_home"),
+    # path('counter/<int:pk>/', views.ArticleCounterRedirectView.as_view(), name='article-counter'),
     path('<int:pk>/', RedirectView.as_view(), name='article-detail'),
-    path('<slug:pk>/', views.ArticleDetailView.as_view(), name='article-detail'),
+    path('<int:pk>/', views.ArticleDetailView.as_view(), name='article-detail'),
     path('lists/', views.ArticleListView.as_view(), name="article-list"),
 
     path('archive/', ArchiveIndexView.as_view(model=Article, date_field="pub_date"), name="article_archive"),

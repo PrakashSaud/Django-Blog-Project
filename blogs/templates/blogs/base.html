@@ -11,17 +11,17 @@
     <div class="nav-left">
         <h1 id="logo">LOGO</h1>
         <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'about' %}">About</a></li>
             <li><a href="{% url 'contact' %}">Contact</a></li>
         </ul>
     </div>
-    <div class="nav-right">
-        <form action="#" method="get">
-            <input class="form-input" type="text" name="query" placeholder="Article Search">
-            <button class="btn">Search</button>
-        </form>
-    </div>
+<!--    <div class="nav-right">-->
+<!--        <form action="#" method="get">-->
+<!--            <input class="form-input" type="text" name="query" placeholder="Article Search">-->
+<!--            <button class="btn">Search</button>-->
+<!--        </form>-->
+<!--    </div>-->
 </nav>
 {% block content %}
 
